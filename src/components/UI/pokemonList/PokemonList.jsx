@@ -1,14 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import STL from "./PokemonList.module.scss";
 import PokemonTile from "../pokemonTile/PokemonTile";
 import sxios from "axios";
 
 class PokemonList extends React.Component {
   state = {
+    link: "https://pokeapi.co/api/v2/pokemon/",
     pokemons: null,
   };
 
   async componentDidMount() {
-    const arr = await sxios.get("https://pokeapi.co/api/v2/pokemon/");
+    const arr = await sxios.get(this.state.link);
     this.setState({ pokemons: arr.data["results"] });
   }
 
@@ -16,9 +18,9 @@ class PokemonList extends React.Component {
     return (
       <React.Fragment>
         {this.state.pokemons ? (
-          <div>
+          <div className={STL.list}>
             {this.state.pokemons.map((p) => (
-              <PokemonTile name={p.name} key={p.id} />
+              <PokemonTile name={p.name} url={p.url} key={p.name} />
             ))}
           </div>
         ) : (
