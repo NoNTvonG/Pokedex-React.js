@@ -82,4 +82,17 @@
       padding-bottom: 30px;
     }
   }
+  @media screen and (max-width: 640px) {
+    .pokemonInfo {
+      .blockFirst {
+        .blockInfo {
+          .pokName {
+            height: 100px;
+            flex-direction: column;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
 }
