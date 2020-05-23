@@ -13,14 +13,58 @@
   --white: #ffffff;
   --clouds: #ecf0f1;
   --silver: #bdc3c7;
-  --dark: #000000;
+  --black: #000000;
+
+  --normal: #bdbdae;
+  --poison: #a95da1;
+  --psychic: #f562b1;
+  --grass: #8cd751;
+  --ground: #edcb56;
+  --ice: #96f1ff;
+  --fire: #fa5443;
+  --rock: #ccbc72;
+  --dragon: #8975ff;
+  --water: #56aeff;
+  --bug: #c2d21f;
+  --dark: #8e6956;
+  --fighting: #a85643;
+  --ghost: #7975d7;
+  --steel: #c4c2db;
+  --flying: #79a3ff;
+  --electric: #fde53c;
+  --fairy: #faadff;
 
   // ══════════ UI \ navBar ══════════
   --navBar-heaght: 60px;
 
   // ══════════ Static ══════════
   .container {
+    height: 100%;
     margin: 0 auto;
     max-width: 1240px;
+    padding: 0 30px;
+    background-color: var(--white);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.4);
+  }
+
+  @media screen and (max-width: 1330px) {
+    .container {
+      max-width: 940px;
+    }
+  }
+  @media screen and (max-width: 1050px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  @media screen and (max-width: 830px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    .container {
+      max-width: 300px;
+    }
   }
 }

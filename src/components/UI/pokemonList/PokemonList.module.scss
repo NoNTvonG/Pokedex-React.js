@@ -1,6 +1,49 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  padding-top: 30px;
+
+  button {
+    height: 50px;
+    width: 75px;
+    background-color: var(--clouds);
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+  button:focus {
+    outline: none;
+  }
+  button:hover {
+    transform: translateY(-5px);
+    box-shadow: 1px 5px 3px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
 .list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  margin-top: 50px;
+  grid-gap: 30px;
+  padding-bottom: 50px;
+
+  a {
+    color: var(--black);
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media screen and (max-width: 640px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
 }
