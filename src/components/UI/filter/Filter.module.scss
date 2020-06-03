@@ -1,0 +1,30 @@
+.filterPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+  .searchPanel {
+    display: flex;
+    justify-content: center;
+    .inner_searchPanel {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 390px;
+      border-radius: 5px;
+      box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+      input {
+        width: 330px;
+        height: 50px;
+        font-size: 1.2em;
+        border: none;
+        outline: none;
+        color: var(--asbestos);
+      }
+      i {
+        font-size: 20px;
+        padding-right: 13px;
+        color: var(--asbestos);
+      }
+    }
+  }
+}
