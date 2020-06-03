@@ -1,14 +1,18 @@
 import React from "react";
 import STL from "./PokemonList.module.scss";
 import PokemonTile from "../pokemonTile/PokemonTile";
+import Pagination from "../pagination/Pagination";
 import sxios from "axios";
 
 class PokemonList extends React.Component {
   state = {
-    link: "https://pokeapi.co/api/v2/pokemon/",
+    link: "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=99999",
     nextPage: null,
     previusPage: null,
     pokemons: null,
+    pageSize: 21,
+    currentPage: 1,
+    pokemonsCount: 0,
   };
 
   async componentDidMount() {
@@ -17,39 +21,37 @@ class PokemonList extends React.Component {
       pokemons: arr.data["results"],
       nextPage: arr.data.next,
       previusPage: arr.data.previous,
+      pokemonsCount: arr.data.count,
     });
   }
-
   render() {
-    const nextPage = async () => {
-      const arr = await sxios.get(this.state.nextPage);
+    let currentPokemon = null;
+    // Створення масиву з покемонами
+    const indexOfNextPokemon = this.state.currentPage * this.state.pageSize;
+    const indexOfPreviousPokemon = indexOfNextPokemon - this.state.pageSize;
+    if (this.state.pokemons) {
+      currentPokemon = this.state.pokemons.slice(
+        indexOfPreviousPokemon,
+        indexOfNextPokemon
+      );
+    }
+    // Зміна сторінки
+    const paginate = (pageNumber) =>
       this.setState({
-        pokemons: arr.data["results"],
-        nextPage: arr.data.next,
-        previusPage: arr.data.previous,
+        currentPage: pageNumber,
       });
-    };
-    const backPage = async () => {
-      if (this.state.previusPage) {
-        const arr = await sxios.get(this.state.previusPage);
-        this.setState({
-          pokemons: arr.data["results"],
-          nextPage: arr.data.next,
-          previusPage: arr.data.previous,
-        });
-        console.log(this.state.previusPage);
-      }
-    };
 
     return (
       <React.Fragment>
-        <div className={STL.pagination}>
-          <button onClick={backPage}>Back</button>
-          <button onClick={nextPage}>Next</button>
-        </div>
+        <Pagination
+          pokemonsPerPage={this.state.pageSize}
+          totalPokemons={this.state.pokemonsCount}
+          paginate={paginate}
+          currentPage={this.state.currentPage}
+        />
         {this.state.pokemons ? (
           <div className={STL.list}>
-            {this.state.pokemons.map((p) => (
+            {currentPokemon.map((p) => (
               <PokemonTile name={p.name} url={p.url} key={p.name} />
             ))}
           </div>
