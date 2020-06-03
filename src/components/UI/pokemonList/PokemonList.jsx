@@ -1,7 +1,7 @@
 import React from "react";
 import STL from "./PokemonList.module.scss";
 import PokemonTile from "../pokemonTile/PokemonTile";
-import Pagination from "../pagination/Pagination";
+import Pagination from "rc-pagination";
 import sxios from "axios";
 
 class PokemonList extends React.Component {
@@ -24,6 +24,13 @@ class PokemonList extends React.Component {
       pokemonsCount: arr.data.count,
     });
   }
+  onChange = (page) => {
+    console.log(page);
+    this.setState({
+      currentPage: page,
+    });
+  };
+
   render() {
     let currentPokemon = null;
     // Створення масиву з покемонами
@@ -35,20 +42,9 @@ class PokemonList extends React.Component {
         indexOfNextPokemon
       );
     }
-    // Зміна сторінки
-    const paginate = (pageNumber) =>
-      this.setState({
-        currentPage: pageNumber,
-      });
 
     return (
       <React.Fragment>
-        <Pagination
-          pokemonsPerPage={this.state.pageSize}
-          totalPokemons={this.state.pokemonsCount}
-          paginate={paginate}
-          currentPage={this.state.currentPage}
-        />
         {this.state.pokemons ? (
           <div className={STL.list}>
             {currentPokemon.map((p) => (
@@ -58,6 +54,18 @@ class PokemonList extends React.Component {
         ) : (
           <h1>Loading...</h1>
         )}
+        <Pagination
+          className={STL.pagination}
+          current={this.state.currentPage}
+          total={this.state.pokemonsCount}
+          onChange={this.onChange}
+          defaultPageSize={this.state.pageSize}
+          totalBoundaryShowSizeChanger={this.state.pokemonsCount}
+          jumpPrevIcon={<i class="fas fa-angle-double-left"></i>}
+          jumpNextIcon={<i class="fas fa-angle-double-right"></i>}
+          prevIcon={<i class="fas fa-angle-left"></i>}
+          nextIcon={<i class="fas fa-angle-right"></i>}
+        />
       </React.Fragment>
     );
   }
