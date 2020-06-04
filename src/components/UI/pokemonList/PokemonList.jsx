@@ -2,7 +2,7 @@ import React from "react";
 import STL from "./PokemonList.module.scss";
 import PokemonTile from "../pokemonTile/PokemonTile";
 import Pagination from "rc-pagination";
-import sxios from "axios";
+import axios from "axios";
 import Filter from "../filter/Filter";
 
 class PokemonList extends React.Component {
@@ -15,14 +15,12 @@ class PokemonList extends React.Component {
     currentPage: 1,
     pokemonsCount: 0,
     search: "",
+    pokemonArr: [],
   };
-
   async componentDidMount() {
-    const arr = await sxios.get(this.state.link);
+    const arr = await axios.get(this.state.link);
     this.setState({
       pokemons: arr.data["results"],
-      nextPage: arr.data.next,
-      previusPage: arr.data.previous,
       pokemonsCount: arr.data.count,
     });
   }
@@ -36,24 +34,45 @@ class PokemonList extends React.Component {
     this.setState({ search: value });
   };
 
+  // Витягування типу покемона
+  // fetchPokemon = async () => {
+  //   for (let i = 1; i < this.state.pokemonsCount; i++) {
+  //     await this.getPokemon(i);
+  //   }
+  // };
+  // getPokemon = async (id) => {
+  //   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+
+  //   await axios.get(url).then((res) => {
+  //     const types = res.data.types;
+  //     const type = types.map((t) => t.type.name);
+  //     this.setState((prevState) => ({
+  //       pokemonArr: [...prevState.pokemonArr, type],
+  //     }));
+  //   });
+  // };
+
   render() {
     let currentPokemon = null;
     let filterPokemons = null;
     // Створення масиву з покемонами
     const indexOfNextPokemon = this.state.currentPage * this.state.pageSize;
     const indexOfPreviousPokemon = indexOfNextPokemon - this.state.pageSize;
+    // перевірка чи покемони загружені
     if (this.state.pokemons) {
+      //створення сторінок з покемонами
       currentPokemon = this.state.pokemons.slice(
         indexOfPreviousPokemon,
         indexOfNextPokemon
       );
+      //фільтер покемонів по назві
+      // debugger;
       filterPokemons = this.state.pokemons.filter((p) => {
         return (
           p.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
         );
       });
     }
-
     return (
       <React.Fragment>
         <Filter updateData={this.updateSearch} />

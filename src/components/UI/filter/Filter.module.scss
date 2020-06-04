@@ -5,6 +5,7 @@
   .searchPanel {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
     .inner_searchPanel {
       display: flex;
       justify-content: center;
@@ -24,6 +25,38 @@
         font-size: 20px;
         padding-right: 13px;
         color: var(--asbestos);
+      }
+    }
+  }
+  .typesFilter {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    user-select: none;
+    .typePanel {
+      display: flex;
+      justify-content: center;
+      .inner_typePanel {
+        display: flex;
+        align-items: center;
+        background-color: var(--clouds);
+        width: 90px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.2);
+        input {
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+        }
+        label {
+          display: inline-block;
+          padding-left: 10px;
+          cursor: pointer;
+        }
+        label:first-letter {
+          text-transform: capitalize;
+        }
       }
     }
   }
