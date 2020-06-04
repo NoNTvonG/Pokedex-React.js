@@ -50,11 +50,11 @@ class Filter extends React.Component {
             />
           </div>
         </div>
-        <div className={STL.typesFilter}>
+        {/* <div className={STL.typesFilter}>
           {this.state.types.map((t) => (
             <TypeFilter name={t} type={t} key={t} />
           ))}
-        </div>
+        </div> */}
       </div>
     );
   }

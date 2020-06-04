@@ -5,7 +5,7 @@
   .searchPanel {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
     .inner_searchPanel {
       display: flex;
       justify-content: center;
@@ -56,6 +56,19 @@
         }
         label:first-letter {
           text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .filterPanel {
+    .searchPanel {
+      .inner_searchPanel {
+        width: 300px;
+        input {
+          width: 230px;
         }
       }
     }

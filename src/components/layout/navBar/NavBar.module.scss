@@ -18,3 +18,11 @@
     color: var(--white);
   }
 }
+
+@media screen and (max-width: 640px) {
+  .navBar {
+    a {
+      justify-content: center;
+    }
+  }
+}

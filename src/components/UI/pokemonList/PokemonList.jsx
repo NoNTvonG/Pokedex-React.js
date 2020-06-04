@@ -15,7 +15,6 @@ class PokemonList extends React.Component {
     currentPage: 1,
     pokemonsCount: 0,
     search: "",
-    pokemonArr: [],
   };
   async componentDidMount() {
     const arr = await axios.get(this.state.link);

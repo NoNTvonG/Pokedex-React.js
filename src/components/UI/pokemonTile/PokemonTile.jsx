@@ -9,6 +9,7 @@ class PokemonTile extends React.Component {
     imageURL: "",
     pokemonId: "",
     Link: "",
+    loading: true,
   };
 
   componentDidMount() {
@@ -19,12 +20,12 @@ class PokemonTile extends React.Component {
       pokemonId +
       ".png";
     const Link = name;
-
     this.setState({
       name,
       imageURL,
       pokemonId,
       Link,
+      // loading: false,
     });
   }
 
@@ -32,7 +33,15 @@ class PokemonTile extends React.Component {
     return (
       <NavLink to={`pokemon/${this.state.pokemonId}`}>
         <div className={STL.pokemonTyle}>
-          <img src={this.state.imageURL} alt="ico" />
+          {this.state.loading ? <div className={STL.loader}></div> : null}
+          <img
+            onLoad={() => this.setState({ loading: false })}
+            src={this.state.imageURL}
+            alt="ico"
+            style={
+              this.state.loading ? { display: "none" } : { display: "block" }
+            }
+          />
           <div className={STL.info}>
             <p>{this.state.name}</p>
           </div>

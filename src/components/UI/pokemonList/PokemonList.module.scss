@@ -41,4 +41,10 @@
   .list {
     grid-template-columns: 1fr;
   }
+  .pagination {
+    li {
+      min-width: 15px;
+      height: 15px;
+    }
+  }
 }
